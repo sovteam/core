@@ -1,6 +1,6 @@
 # sov
 
-The core Sov business logic in portable Clojure to run on the JVM, JS or .NET.
+The core Sov business logic in portable Clojure.
 
 All low-level platform-specific dependencies such as networking and persistence are injected: simply passed in as callback functions.
 
