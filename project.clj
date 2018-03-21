@@ -1,4 +1,4 @@
-(defproject core "0.1.0-SNAPSHOT"
+(defproject sov/core1 "1.0-SNAPSHOT"
   :description "The core Sov business logic."
   :url "https://github.com/sovteam/core"
   :license {:name "GNU General Public License v3.0"
