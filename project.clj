@@ -4,7 +4,8 @@
   :license {:name "GNU General Public License v3.0"
             :url "http://www.gnu.org/licenses/gpl-3.0.html"}
 
-  :dependencies [[org.clojure/clojure "1.8.0"]]
+  :dependencies [[org.clojure/clojure "1.8.0"]
+                 [simple/check "2.0.0"]]
 
   :profiles {:dev {:dependencies [[midje "1.8.3"]
 

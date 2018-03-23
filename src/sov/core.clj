@@ -14,7 +14,7 @@
   (:database *state*))
 
 (defn upsert [table-name values]
-  (println "database" (database))
+  (println "db" (database))
   (set! *state* {:database
                  (.upsert (database) (name table-name)
                           (into {} (map (fn [[k v]]
