@@ -44,6 +44,8 @@
 (defn ^:command own-nick-set [new-nick]
   (property-set! :own-nick new-nick))
 
+(defn init []
+  )
 
 (defn -init [{:strs [database ^Queue state-out-queue]}]
   (alter-var-root *state* assoc :database database)

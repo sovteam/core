@@ -1,6 +1,9 @@
-(ns simple.test-script2
+(ns sov.db.test-script
   (:require
+    [sov.db.transient :refer [transient-database]]
+    [sov.database :refer [*database*]]
     [simple.state1 :refer [apply-to]]
+    [simple.check2 :refer [check]]
     [cheshire.core :as json]
     [io.aviso.exception :refer [write-exception]]
     [io.aviso.ansi :refer [yellow]]))
@@ -97,10 +100,13 @@
 (defn script-user
   "Same as script, but takes an initial user argument, allowing the user to be
   omitted from the steps."
-  [user description initial-state & script]
-  (reduce (partial step description)
-          initial-state
-          (->steps user script)))
+  [user description data & script]
+  (let [db (transient-database data)]
+    (binding [*database* db]
+      (reduce (partial step description)
+              data
+              (->steps user script)))
+    @db))
 
 (defn script
   "Takes a test script description, its initial state and a sequence of steps.
@@ -129,5 +135,5 @@
     with-users
     :bob logout nil
     :ann active-users [:ann])"
-  [description initial-state & script]
-  (apply script-user nil description initial-state script))
+  [description data & script]
+  (apply script-user nil description data script))

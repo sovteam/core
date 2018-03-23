@@ -1,19 +1,20 @@
 (ns sov.core-test
   (:require
-    [sov.core :refer [update-schema own-name own-nick own-name-set own-nick-set]]
-    [simple.test-script2 :refer [script script-user]]))
-
-(defn init-database []
-  {:database (doto (transient-database) update-schema)})
-
-(try
-  (def own-name-ann
-    (script "User enters own name on first use."
-            (init-database)
-            :ann own-name                 nil
-            :ann own-nick                 nil
-            :ann own-name-set "Ann Smith" nil
-            :ann own-nick-set "Wakanda"   nil))
-  (catch Exception e (.printStackTrace e)))
+    [sov.core :refer [init own-name own-nick own-name-set own-nick-set]]
+    [sov.db.test-script :refer [script]]))
 
 ; (do (require 'midje.repl) (midje.repl/autotest))
+
+(def initial-state
+  (script "New Sov installation" {} init))
+
+(def new-user-ann
+  (script "User Ann enters own name on first use."
+    initial-state
+    own-name                 nil
+    own-nick                 nil
+    own-name-set "Ann Smith"
+    own-nick-set "Annie"
+    own-name                 "Ann Smith"
+    own-nick                 "Annie"))
+
