@@ -1,20 +1,20 @@
 (ns sov.core-test
   (:require
-    [sov.core :refer [init own-name own-nick own-name-set own-nick-set]]
-    [sov.db.test-script :refer [script]]))
+    [sov.core :refer [init-db own-name-set own-nick-set]]
+    [sov.test-script :refer [script-user]]))
 
 ; (do (require 'midje.repl) (midje.repl/autotest))
 
 (def initial-state
-  (script "New Sov installation" {} init))
+  (script-user :ann "New Sov installation" {} init-db))
 
 (def new-user-ann
-  (script "User Ann enters own name on first use."
+  (script-user :ann "Ann enters own name on first use."
     initial-state
-    own-name                 nil
-    own-nick                 nil
+    [:profile :own-name] nil
+    [:profile :own-nick] nil
     own-name-set "Ann Smith"
     own-nick-set "Annie"
-    own-name                 "Ann Smith"
-    own-nick                 "Annie"))
+    [:profile :own-name] "Ann Smith"
+    [:profile :own-nick] "Annie"))
 

@@ -8,12 +8,7 @@
                  [simple/check "2.0.0"]]
 
   :profiles {:dev {:dependencies [[midje "1.8.3"]
-
-                                  ;[simple/test-script1 "0.1.1"]
-                                    [cheshire "5.8.0"] ; JSON for serializing test arguments.
-                                    [io.aviso/pretty "0.1.34"]
-
-                                  ]}}
+                                  [io.aviso/pretty "0.1.34"]]}}
   :aot :all
   :jvm-opts ["-Dclojure.compiler.elide-meta=[:doc :file :line :added]"
              "-Dclojure.compiler.direct-linking=true"])

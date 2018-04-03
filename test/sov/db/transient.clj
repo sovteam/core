@@ -8,10 +8,10 @@
       (createTable [this table-name column-specs]
         #_(assoc-in data-atom [:schema table-name] column-specs))
 
-      (upsert [this table-name values]
-        (swap! data-atom update-in [:data table-name] conj values))
+      (update [this table-name pk-column pk-value record]
+        (swap! data-atom update-in [:data table-name pk-value] merge record))
 
-      (selectOne [this table-name column value]
+      (select [this table-name column value]
         (let [table-name (keyword table-name)]
           (println ">>>>" table-name)
           (->> data-atom :data (some #(= (% column) value)))))
