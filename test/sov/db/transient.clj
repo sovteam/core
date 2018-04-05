@@ -1,10 +1,11 @@
 (ns sov.db.transient
-  (:import (clojure.lang IDeref)))
+  (:import (clojure.lang IDeref)
+           (sov.db Database)))
 
 (defn transient-database [data]
   (let [data-atom (atom data)]
     (reify
-      sov.Database
+      Database
       (createTable [this table-name column-specs]
         #_(assoc-in data-atom [:schema table-name] column-specs))
 

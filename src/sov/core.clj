@@ -1,7 +1,7 @@
 (ns sov.core
   (:require
     [simple.state1 :refer [*state*]]
-    [sov.database :as db])
+    [sov.db.database :as db])
   (:gen-class
     :methods [^:static [init [java.util.Map] java.util.Queue]])
   (:import (java.util Queue Map)))
@@ -15,8 +15,8 @@
 
 (defn property-set! [key new-value]
   (if (contains? (properties) key)
-    (db/insert "properties" {"key" (name key)  "value" new-value})
-    (db/update "properties"  "key" (name key) {"value" new-value}))
+    (db/insert! "properties" {"key" (name key)  "value" new-value})
+    (db/update! "properties" "key" (name key) {"value" new-value}))
   (swap! *state* assoc-in [:properties key] new-value))
 
 (defn own-name-set [new-name]

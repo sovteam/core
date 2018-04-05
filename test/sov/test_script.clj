@@ -1,7 +1,7 @@
 (ns sov.test-script
   (:require
     [sov.db.transient :refer [transient-database]]
-    [sov.database :refer [*database*]]
+    [sov.db.database :refer [*database*]]
     [simple.state1 :refer [*state*]]
     [simple.check2 :refer [check]]
     [io.aviso.exception :refer [write-exception]]
